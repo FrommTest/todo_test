@@ -1,0 +1,21 @@
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "single"  # 일반 문자열은 '
+indent-style = "space"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W", "PT"]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+multiline-quotes = "single"
+docstring-quotes = "double"
+avoid-escape = false
+
+[tool.ruff.lint.isort]
+known-first-party = ["tests"]
+combine-as-imports = true
+force-sort-within-sections = true
