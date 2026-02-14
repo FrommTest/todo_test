@@ -20,7 +20,7 @@ def do_sign_in(page):
     page.goto(PAGE_URL)
     page.locator('#login-username').fill(os.getenv('ID'))
     page.locator('#login-password').fill(os.getenv('PW'))
-    page.get_by_text("로그인",exact=True).click()
+    page.get_by_text('로그인', exact=True).click()
 
 
 @pytest.fixture
