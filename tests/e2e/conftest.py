@@ -1,6 +1,6 @@
 import os
 
-from playwright.sync_api import Playwright
+from playwright.sync_api import Playwright, expect
 import pytest
 
 from tests.e2e.utils.playwright_config import playwright_config_base, playwright_tear_down_base
@@ -21,6 +21,7 @@ def do_sign_in(page):
     page.locator('#login-username').fill(os.getenv('ID'))
     page.locator('#login-password').fill(os.getenv('PW'))
     page.get_by_text('로그인', exact=True).click()
+    expect(page.locator('#app-title')).to_have_text(os.getenv('APP_TITLE'))
 
 
 @pytest.fixture
