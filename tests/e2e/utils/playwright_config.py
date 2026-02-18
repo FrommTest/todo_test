@@ -1,6 +1,7 @@
 import os
 from typing import Optional
 
+
 from dotenv import load_dotenv
 from playwright.sync_api import Browser, BrowserContext, Page, Playwright, ViewportSize
 
@@ -11,8 +12,8 @@ URL = os.getenv('URL')
 def playwright_config_base(
     playwright: Playwright,
     target_url: str,
-    browser: Browser | None = None,
-    storage_state: str | None = None,
+    browser: Optional[Browser] = None,
+    storage_state: Optional[str] = None,
     headless: bool = False,
     permissions: Optional[list[str]] = None,
 ) -> tuple[Page, BrowserContext, Browser]:
