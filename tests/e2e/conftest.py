@@ -8,7 +8,7 @@ from tests.e2e.utils.playwright_config import playwright_config_base, playwright
 
 HEADLESS = False
 PAGE_URL = os.getenv('PAGE_URL', 'https://black-stone-05a57af00.2.azurestaticapps.net/')
-LOGIN_URL = f'{PAGE_URL}login' #f-string 사용
+LOGIN_URL = f'{PAGE_URL}login'  # f-string 사용
 
 
 @pytest.fixture(scope='session')
