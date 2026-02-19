@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import tempfile
 
 from playwright.sync_api import Playwright
@@ -8,7 +9,7 @@ from tests.e2e.utils.playwright_config import playwright_config_base, playwright
 
 HEADLESS = False
 PAGE_URL = os.getenv('PAGE_URL', 'https://black-stone-05a57af00.2.azurestaticapps.net/')
-LOGIN_URL = f'{PAGE_URL}login'  # f-string 사용
+LOGIN_URL = f'{PAGE_URL.rstrip("/")}/login'  # f-string 사용
 
 
 @pytest.fixture(scope='session')
@@ -36,7 +37,7 @@ def web_session_driver(browser, playwright: Playwright):
 
     yield cookie_file
 
-    os.remove(cookie_file)
+    Path(cookie_file).unlink(missing_ok=True)
 
 
 @pytest.fixture
