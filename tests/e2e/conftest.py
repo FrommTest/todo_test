@@ -25,8 +25,8 @@ def web_session_driver(browser, playwright: Playwright):
 
     page.goto(PAGE_URL, wait_until='domcontentloaded')
     page.wait_for_url(LOGIN_URL)
-    page.fill('#login-username', 'admin')
-    page.fill('#login-password', 'admin1!')
+    page.locator('#login-username').fill('admin')
+    page.locator('#login-password').fill('admin1!')
     page.click('button.login-btn')
     page.wait_for_url(PAGE_URL)
 
@@ -43,7 +43,7 @@ def web_session_driver(browser, playwright: Playwright):
 def todo_onyu_page(browser, playwright: Playwright, request, web_session_driver):
     no_cookie = request.node.get_closest_marker('no_cookie')
 
-    storage = None if no_cookie else set_up
+    storage = None if no_cookie else web_session_driver
     page, context, browser = playwright_config_base(playwright, PAGE_URL, browser, storage, headless=HEADLESS)
     try:
         yield page
