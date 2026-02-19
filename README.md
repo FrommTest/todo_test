@@ -67,7 +67,7 @@ pytest tests/api
 pytest tests/e2e/feature
 
 # 특정 테스트 파일 실행
-pytest tests/e2e/case/test_todo.py
+pytest tests/e2e/case/test_jinsol.py
 
 # 상세 출력
 pytest -v
