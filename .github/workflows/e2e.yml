@@ -1,0 +1,43 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - onyu-main
+      - Jinsol-main
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Set PAGE_URL by branch
+        run: |
+          BASE_BRANCH="${{ github.base_ref }}"
+          if [ "$BASE_BRANCH" = "main" ]; then
+            echo "PAGE_URL=${{ secrets.PAGE_URL_MAIN }}" >> $GITHUB_ENV
+          elif [ "$BASE_BRANCH" = "onyu-main" ]; then
+            echo "PAGE_URL=${{ secrets.PAGE_URL_ONYU }}" >> $GITHUB_ENV
+          elif [ "$BASE_BRANCH" = "Jinsol-main" ]; then
+            echo "PAGE_URL=${{ secrets.PAGE_URL_JINSOL }}" >> $GITHUB_ENV
+          fi
+
+      - name: Run E2E tests
+        env:
+          ID: ${{ secrets.ID }}
+          PW: ${{ secrets.PW }}
+          APP_TITLE: ${{ secrets.APP_TITLE }}
+        run: pytest tests/e2e -v --reruns 2
