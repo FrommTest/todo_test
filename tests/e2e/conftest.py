@@ -1,7 +1,7 @@
 import os
 import tempfile
 
-from playwright.sync_api import Playwright
+from playwright.sync_api import Playwright, expect
 import pytest
 
 from tests.e2e.utils.playwright_config import playwright_config_base, playwright_tear_down_base
@@ -43,7 +43,7 @@ def web_session_driver(browser, playwright: Playwright):
 def todo_onyu_page(browser, playwright: Playwright, request, web_session_driver):
     no_cookie = request.node.get_closest_marker('no_cookie')
 
-    storage = None if no_cookie else web_session_driver
+    storage = None if no_cookie else set_up
     page, context, browser = playwright_config_base(playwright, PAGE_URL, browser, storage, headless=HEADLESS)
     try:
         yield page

@@ -119,3 +119,49 @@ def todo_page(browser, playwright: Playwright, request, web_session_driver):
 def test_example(todo_page):
     todo_page.click("button")
 ```
+
+## 브랜치 전략
+
+### 규칙
+
+- **main 브랜치는 직접 수정하지 마세요**
+- 각자 이름으로 된 브랜치가 있습니다 (예: `wooyoung`, `jihye`)
+- 작업 시 자기 이름 브랜치에서 feature 브랜치를 생성하세요
+- PR은 자기 이름 브랜치로 올려주세요
+- main에 공통 변경사항이 올라오면 리베이스해서 반영하세요
+
+### 작업 흐름 예시
+
+```bash
+# 1. 자기 이름 브랜치로 이동
+git checkout wooyoung
+
+# 2. feature 브랜치 생성
+git checkout -b feature/login-test
+
+# 3. 작업 후 커밋
+git add .
+git commit -m "feat: 로그인 테스트 추가"
+
+# 4. 자기 이름 브랜치로 PR 생성
+git push origin feature/login-test
+# GitHub에서 feature/login-test → wooyoung 으로 PR 생성
+```
+
+### main 변경사항 반영 (리베이스)
+
+main에 공통 변경사항이 올라왔을 때:
+
+```bash
+# 1. main 최신화
+git fetch origin main
+
+# 2. 자기 이름 브랜치로 이동
+git checkout wooyoung
+
+# 3. main 리베이스
+git rebase origin/main
+
+# 4. 충돌 해결 후 push (force 필요)
+git push origin wooyoung --force-with-lease
+```
