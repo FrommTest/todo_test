@@ -20,23 +20,23 @@ def browser(playwright: Playwright):
 
 @pytest.fixture(scope='session')
 def web_session_driver(browser, playwright: Playwright):
-    context = browser.new_context()
-    page = context.new_page()
+    temp_browser = browser.new_context()  # 임시 브라우저 세션 생성
+    temp_page = temp_browser.new_page()
 
-    page.goto(PAGE_URL, wait_until='domcontentloaded')
-    page.wait_for_url(LOGIN_URL)
-    page.locator('#login-username').fill('admin')
-    page.locator('#login-password').fill('admin1!')
-    page.click('button.login-btn')
-    page.wait_for_url(PAGE_URL)
+    temp_page.goto(PAGE_URL, wait_until='domcontentloaded')
+    temp_page.wait_for_url(LOGIN_URL)
+    temp_page.locator('#login-username').fill('admin')
+    temp_page.locator('#login-password').fill('admin1!')
+    temp_page.click('button.login-btn')
+    temp_page.wait_for_url(PAGE_URL)
 
-    storage_file = tempfile.mktemp(suffix='.json')
-    context.storage_state(path=storage_file)
-    context.close()
+    cookie_file = tempfile.mktemp(suffix='.json')
+    temp_browser.storage_state(path=cookie_file)
+    temp_browser.close()
 
-    yield storage_file
+    yield cookie_file
 
-    os.remove(storage_file)
+    os.remove(cookie_file)
 
 
 @pytest.fixture
