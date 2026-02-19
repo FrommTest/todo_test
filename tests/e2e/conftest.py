@@ -1,7 +1,7 @@
 import os
 import tempfile
 
-from playwright.sync_api import Playwright, expect
+from playwright.sync_api import Playwright
 import pytest
 
 from tests.e2e.utils.playwright_config import playwright_config_base, playwright_tear_down_base
