@@ -5,7 +5,7 @@ import pytest
 
 from tests.e2e.utils.playwright_config import playwright_config_base, playwright_tear_down_base
 
-HEADLESS = False
+HEADLESS = True
 
 PAGE_URL = os.getenv('PAGE_URL', 'https://gray-cliff-009510f00.4.azurestaticapps.net/')
 
