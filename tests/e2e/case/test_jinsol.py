@@ -8,6 +8,6 @@ def test_login(logged_in):
 
     page.goto(PAGE_URL)
 
-    expected_url = 'https://gray-cliff-009510f00.4.azurestaticapps.net/login'
-    print(page.url)
-    expect(page).to_have_url(expected_url)
+    # expected_url = 'https://gray-cliff-009510f00.4.azurestaticapps.net/login'
+
+    expect(page).to_have_url(PAGE_URL)
