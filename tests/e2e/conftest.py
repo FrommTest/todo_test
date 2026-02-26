@@ -49,4 +49,4 @@ def todo_onyu_page(browser, playwright: Playwright, request, web_session_driver)
     try:
         yield page
     finally:
-        playwright_tear_down_base(context)
+        playwright_tear_down_base(request, context, page)

@@ -4,6 +4,9 @@ PAGE_URL = 'https://black-stone-05a57af00.2.azurestaticapps.net/'
 
 
 class TestTodoPage:
+    # def test_page_login(self, todo_onyu_page):
+    #     expect(todo_onyu_page.locator('#login-username')).to_be_visible()
+
     def test_page_url(self, todo_onyu_page):
         expect(todo_onyu_page).to_have_url(PAGE_URL)
 
